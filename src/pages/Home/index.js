@@ -36,6 +36,7 @@ export default function Home() {
       const response = await api.get('/products');
       const data = response.data.map(product => ({
         ...product,
+        priceFormatted: formatPrice(product.price),
       }));
       setProducts(data);
     }
@@ -53,7 +54,7 @@ export default function Home() {
             <Product>
               <ProductImage source={{ uri: item.image }} alt={item.title} />
               <ProductName>{item.title}</ProductName>
-              <ProductPrice>{formatPrice(item.price)}</ProductPrice>
+              <ProductPrice>{item.priceFormatted}</ProductPrice>
               <AddButton
                 onPress={() => dispatch(CartActions.addToCartRequest(item.id))}
               >
