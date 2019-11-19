@@ -1,8 +1,11 @@
+import React from 'react'; // importado para usar o spread
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-
 import Home from './pages/Home';
 import Cart from './pages/Cart';
+import Header from './components/Header';
+
+import colors from './styles/colors';
 
 const Routes = createAppContainer(
   createStackNavigator(
@@ -11,16 +14,12 @@ const Routes = createAppContainer(
       Cart,
     },
     {
-      headerLayoutPreset: 'center', // Deixa o titulo no centro por padrao
-      headerBackTitleVisible: false, // Texto no botao de voltar, desabilitado
       // headerMode: 'none',
-      defaultNavigationOptions: {
-        headerStyle: {
-          backgroundColor: '#141419', // cor do fundo
-          height: 64,
-          display: 'flex',
-        },
-        headerTintColor: '#FFF', // cor da letra e botoes
+      defaultNavigationOptions: navigation => ({
+        header: <Header {...navigation} />,
+      }),
+      cardStyle: {
+        backgroundColor: colors.dark,
       },
     }
   )
